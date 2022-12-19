@@ -5,6 +5,8 @@ import './plugins/element.js'
 
 Vue.config.productionTip = false
 
+// 这是vue脚手架产生文件的入口
+
 new Vue({
   router,
   render: h => h(App)

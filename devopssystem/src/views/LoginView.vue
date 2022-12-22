@@ -61,11 +61,14 @@ export default {
         console.log(valid)
         // console.log(obj)
         if (valid) {
-          const d = await axios.post('http://httpbin.org/post', this.loginForm) // axios
-          console.log(d, '&&&&')
-          const { status, data } = d
-          console.log(status)
-          console.log(data)
+          const { data: response } = await axios.post('login/', this.loginForm)
+          if (!response.code) {
+            this.$message('登录成功！')
+            window.localStorage.setItem('token', response.access)
+            this.$router.push('/home')
+          } else {
+            this.$message('登录失败!')
+          }
         } else {
           // test
         }

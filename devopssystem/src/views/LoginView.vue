@@ -19,7 +19,7 @@
         <el-form-item label="密码" prop="password">
           <el-input ref="inputPass" type="password" placeholder="请输入密码" @keyup.enter.native="login"  prefix-icon="el-icon-key" v-model="loginForm.password"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item style="margin-left: 50px">
           <el-button type="primary" icon="el-icon-user" @click="login" >登录</el-button>
           <el-button icon="el-icon-refresh-right" @click="resetForm">重置</el-button>
         </el-form-item>
@@ -52,22 +52,18 @@ export default {
   },
   methods: {
     login () {
-      console.log(this.loginForm.username)
-      console.log(this.loginForm.password)
-      console.log(this.$refs.loginFormRef)
-      const name = 'loginFormRef'
-      console.log(this.$refs[name])
       this.$refs.loginFormRef.validate(async (valid) => {
-        console.log(valid)
-        // console.log(obj)
         if (valid) {
           const { data: response } = await axios.post('login/', this.loginForm)
           if (!response.code) {
-            this.$message('登录成功！')
+            this.$message({
+              message: '登录成功！',
+              type: 'success'
+            })
             window.localStorage.setItem('token', response.access)
             this.$router.push('/home')
           } else {
-            this.$message('登录失败!')
+            this.$message.error('登录失败！')
           }
         } else {
           // test

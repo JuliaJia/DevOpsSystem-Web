@@ -6,6 +6,18 @@ import './plugins/element.js'
 import './assets/css/main.css'
 import axios from 'axios'
 
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('token')
+  return config
+})
+
+axios.interceptors.response.use(function (response) {
+  if (response.data.code && response.data.code < 100) {
+    router.push('/login')
+  } else {
+    return response
+  }
+})
 Vue.config.productionTip = false
 axios.defaults.baseURL = '/api/v1/'
 Vue.prototype.$http = axios

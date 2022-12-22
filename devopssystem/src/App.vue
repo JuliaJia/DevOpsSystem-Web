@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    一切从这里开始
     <router-view></router-view>
   </div>
 </template>

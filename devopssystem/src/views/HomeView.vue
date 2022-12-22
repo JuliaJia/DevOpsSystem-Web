@@ -10,7 +10,7 @@
     </div>
   </el-header>
   <el-container>
-    <el-aside width="210px">
+    <el-aside width="240px">
       <el-menu  router :collapse="isCollapsed" background-color="#216ec6" text-color="#f5f7f9" active-text-color="#f5f7f9">
         <el-menu-item index="/welcome">
         <i class="el-icon-s-data"  style="padding-right: 20px; color: rgb(255,255,255)"></i>
@@ -79,10 +79,10 @@ export default {
     .logo {
       display: flex;
       img {
-        width: 26px;
+        width: 30px;
       }
       .title {
-        font-size: 22px;
+        font-size: 25px;
         margin-left: 5px;
       }
     }

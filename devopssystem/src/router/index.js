@@ -7,15 +7,19 @@ import User from '../views/user/UserView.vue'
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (localtion) {
+  return originalPush.call(this, localtion).catch(err => err)
+}
 const routes = [
   {
     path: '/',
     redirect: '/login'
   },
-  {
-    path: '/users',
-    component: User
-  },
+  // {
+  //   path: '/users',
+  //   component: User
+  // },
   {
     path: '/login',
     component: Login
@@ -25,8 +29,8 @@ const routes = [
     component: Home,
     redirect: '/welcome',
     children: [
-      { path: '/welcome', component: Welcome }
-      // { path: '/users', component: User }
+      { path: '/welcome', component: Welcome },
+      { path: '/users', component: User }
     ]
   }
 ]

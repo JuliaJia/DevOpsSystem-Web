@@ -54,16 +54,21 @@ export default {
     login () {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (valid) {
-          const { data: response } = await axios.post('login/', this.loginForm)
-          if (!response.code) {
-            this.$message({
-              message: '登录成功！',
-              type: 'success'
-            })
-            window.localStorage.setItem('token', response.access)
-            this.$router.push('/home')
-          } else {
-            this.$message.error('登录失败！')
+          console.log(this.loginForm)
+          try {
+            const { data: response } = await axios.post('login/', this.loginForm)
+            if (!response.code) {
+              this.$message({
+                message: '登录成功！',
+                type: 'success'
+              })
+              window.localStorage.setItem('token', response.access)
+              this.$router.push('/home')
+            } else {
+              this.$message.error('登录失败！')
+            }
+          } catch (err) {
+            this.$message.error('密码错误，登录失败！')
           }
         } else {
           // test

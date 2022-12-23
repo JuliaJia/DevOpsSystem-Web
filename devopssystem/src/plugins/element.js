@@ -4,7 +4,8 @@ import {
   RadioButton, Message, Container,
   Header, Aside, Footer, Main, Menu, MenuItem, Submenu,
   Breadcrumb, BreadcrumbItem, Card, Row, Col, Table,
-  TableColumn, Dialog, Pagination, Switch, MessageBox, Tooltip
+  TableColumn, Dialog, Pagination, Switch, MessageBox, Tooltip,
+  DropdownMenu, DropdownItem, Dropdown
 } from 'element-ui'
 
 import 'element-ui/lib/theme-chalk/index.css'
@@ -35,6 +36,9 @@ Vue.use(Pagination)
 Vue.use(Switch)
 Vue.component(MessageBox.name, MessageBox)
 Vue.use(Tooltip)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Dropdown)
 
 Vue.prototype.$message = Message
 Vue.prototype.$msgbox = MessageBox

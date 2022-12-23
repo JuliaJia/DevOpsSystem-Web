@@ -127,7 +127,7 @@ export default {
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 16, message: '长度在6到16个字符', trigger: 'blur' }
+          { min: 8, max: 16, message: '长度在8到16个字符', trigger: 'blur' }
         ],
         checkPass: [
           { required: true, message: '请再次输入确认密码', trigger: 'blur' },

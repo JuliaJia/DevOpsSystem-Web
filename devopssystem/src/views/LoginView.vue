@@ -54,7 +54,7 @@ export default {
     login () {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (valid) {
-          console.log(this.loginForm)
+        //   console.log(this.loginForm)
           try {
             const { data: response } = await axios.post('login/', this.loginForm)
             if (!response.code) {

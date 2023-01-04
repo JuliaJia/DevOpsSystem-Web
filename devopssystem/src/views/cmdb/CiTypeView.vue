@@ -2,8 +2,8 @@
     <div>
         <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-            <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+            <el-breadcrumb-item>CMDB</el-breadcrumb-item>
+            <el-breadcrumb-item>模型列表</el-breadcrumb-item>
         </el-breadcrumb>
         <el-card>
             <el-row :gutter="20">
@@ -13,33 +13,26 @@
                     </el-input>
                 </el-col>
                 <el-col :span="12">
-                    <el-button type="primary" @click="addDialogVisible = true">增加用户</el-button>
+                    <el-button type="primary" @click="addDialogVisible = true">增加模型</el-button>
                 </el-col>
             </el-row>
-            <el-table :data="dataList"  style="border width: 100%">
-                <el-table-column type="index"></el-table-column>
-                <el-table-column prop="username" label="登录名"></el-table-column>
-                <el-table-column prop="is_active" label="激活状态">
-                    <template #default="{ row }">
-                        <el-switch v-model="row.is_active" @change="handleChange(row)"></el-switch>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="is_superuser" label="是否为管理员" ></el-table-column>
-                <el-table-column prop="phone" label="手机" ></el-table-column>
-                <el-table-column label="操作" >
-                    <template #default="{ row }">
-                        <el-tooltip v-if="row.id !== 1 " content="分配角色" effect="light">
-                            <el-button type="warning" icon="el-icon-user" size="mini" @click="handleAuthorUser(row)">分配角色</el-button>
-                        </el-tooltip>
-                        <el-tooltip v-if="row.id !== 1 " content="修改" effect="light">
-                            <el-button type="success" icon="el-icon-edit" size="mini" @click="handleEdit(row)">编辑</el-button>
-                        </el-tooltip>
-                        <el-tooltip v-if="row.id !== 1" content="删除" effect="light">
-                            <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDel(row.id)">删除</el-button>
-                        </el-tooltip>
-                    </template>
-                </el-table-column>
-            </el-table>
+            <el-card class="box-card">
+                <el-table :data="dataList"  style="border width: 100%">
+                    <el-table-column type="index" label="序号"></el-table-column>
+                    <el-table-column prop="label" label="模型标签"></el-table-column>
+                    <el-table-column prop="name" label="模型类型"></el-table-column>
+                    <el-table-column label="操作" >
+                        <template #default="{ row }">
+                            <el-tooltip content="修改" effect="light">
+                                <el-button type="success" icon="el-icon-edit" size="mini" @click="handleEdit(row,row.id)">编辑</el-button>
+                            </el-tooltip>
+                            <el-tooltip content="删除" effect="light">
+                                <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDel(row.id)">删除</el-button>
+                            </el-tooltip>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-card>
             <el-pagination
             @current-change="handleCurrentChange"
               :current-page="pagination.page"
@@ -69,22 +62,13 @@
             </span>
         </el-dialog>
         <!-- 添加用户 -->
-        <el-dialog title="增加用户" :visible.sync="addDialogVisible" @close="resetForm('add')">
+        <el-dialog title="增加模型" :visible.sync="addDialogVisible" @close="resetForm('add')">
             <el-form :model="addForm" :rules="addRules" ref="add" label-width="100px">
-                <el-form-item label="用户名" prop="username">
-                    <el-input v-model="addForm.username"></el-input>
+                <el-form-item label="模型类型" prop="name">
+                    <el-input v-model="addForm.name"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input type="password" v-model="addForm.password"></el-input>
-                </el-form-item>
-                <el-form-item label="确认密码" prop="checkPass">
-                    <el-input type="password" v-model="addForm.checkPass"></el-input>
-                </el-form-item>
-                <el-form-item label="手机" prop="phone">
-                    <el-input v-model="addForm.phone"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="addForm.email"></el-input>
+                <el-form-item label="模型标签" prop="label">
+                    <el-input v-model="addForm.label"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -96,20 +80,11 @@
         <!-- 修改用户 -->
         <el-dialog title="修改" :visible.sync="editDialogVisible">
             <el-form :model="editForm" :rules="editRules" ref="edit" label-width="100px">
-                <el-form-item label="用户名" prop="username">
-                    <el-input v-model="editForm.username">{{ editForm.username }}</el-input>
+                <el-form-item label="模型类型" prop="name">
+                    <el-input v-model="editForm.name"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input type="password" v-model="editForm.password"></el-input>
-                </el-form-item>
-                <el-form-item label="确认密码" prop="checkPass">
-                    <el-input type="password" v-model="editForm.checkPass"></el-input>
-                </el-form-item>
-                <el-form-item label="手机" prop="phone">
-                    <el-input v-model="editForm.phone"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="editForm.email"></el-input>
+                <el-form-item label="模型标签" prop="label">
+                    <el-input v-model="editForm.label"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -141,7 +116,7 @@ export default {
       dataList: [],
       pagination: { page: 1, size: 20, total: 0 },
       addDialogVisible: false,
-      addForm: { username: '', password: '', checkPass: '', phone: '', email: '' },
+      addForm: { name: '', label: '' },
       addRules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -157,7 +132,7 @@ export default {
         ]
       },
       editDialogVisible: false,
-      editForm: { username: '', phone: '', email: '' },
+      editForm: { name: '', label: '' },
       editRules: {},
       addRoleDialogVisible: false,
       defaultProps: {
@@ -171,12 +146,12 @@ export default {
   },
   methods: {
     handleDel (id) {
-      this.$msgbox.confirm('删除该用户，是否继续？', '提示', {
+      this.$msgbox.confirm('删除该模型类型，是否继续？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'danger'
       }).then(async () => {
-        const { data: response } = await axios.delete(`users/user/${id}/`)
+        const { data: response } = await axios.delete(`cmdb/citypes/${id}/`)
         if (response.code) {
           return this.$message.error(response.message)
         }
@@ -193,7 +168,7 @@ export default {
       const name = 'add'
       this.$refs[name].validate(async (valid) => {
         if (valid) {
-          const { data: response } = await axios.post('users/user/', this.addForm)
+          const { data: response } = await axios.post('cmdb/citypes/', this.addForm)
           if (response.code) {
             return this.$message.error(response.message)
           }
@@ -206,10 +181,9 @@ export default {
       if (!page) {
         page = 1
       }
-      const { data: response } = await axios.get('users/user/', {
+      const { data: response } = await axios.get('cmdb/citypes/', {
         params: {
-          page,
-          username: this.keywords
+          page
         }
       })
       if (response.code) {
@@ -229,11 +203,10 @@ export default {
     },
     edit () {
       const { id } = this.editForm
-      console.log(id)
       const name = 'edit'
       this.$refs[name].validate(async valid => {
         if (valid) {
-          const { data: response } = await axios.patch(`users/user/${id}/`, this.editForm)
+          const { data: response } = await axios.patch(`cmdb/citypes/${id}/`, this.editForm)
           if (response.code) {
             return this.$message.error(response.message)
           }

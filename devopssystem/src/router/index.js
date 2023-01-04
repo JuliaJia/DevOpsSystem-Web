@@ -4,6 +4,9 @@ import Login from '../views/LoginView.vue'
 import Home from '../views/HomeView.vue'
 import Welcome from '../views/AboutView.vue'
 import User from '../views/user/UserView.vue'
+import Perm from '../views/user/UserPermView.vue'
+import Role from '../views/user/UserRoleView.vue'
+import CiType from '../views/cmdb/CiTypeView.vue'
 
 Vue.use(VueRouter)
 
@@ -30,7 +33,10 @@ const routes = [
     redirect: '/welcome',
     children: [
       { path: '/welcome', component: Welcome },
-      { path: '/users', component: User }
+      { path: '/users', component: User },
+      { path: '/users/perms', component: Perm },
+      { path: '/users/roles', component: Role },
+      { path: '/cmdb/citypes', component: CiType }
     ]
   }
 ]

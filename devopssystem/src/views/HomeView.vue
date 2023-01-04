@@ -126,7 +126,7 @@ export default {
       }
     },
     async getUserInfo () {
-      const { data: response } = await axios.get('users/whoami/')
+      const { data: response } = await axios.get('users/user/whoami/')
       if (response.code) {
         return this.$message.error(response.message)
       }

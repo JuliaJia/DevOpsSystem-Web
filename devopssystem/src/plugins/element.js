@@ -5,7 +5,7 @@ import {
   Header, Aside, Footer, Main, Menu, MenuItem, Submenu,
   Breadcrumb, BreadcrumbItem, Card, Row, Col, Table,
   TableColumn, Dialog, Pagination, Switch, MessageBox, Tooltip,
-  DropdownMenu, DropdownItem, Dropdown, Tree
+  DropdownMenu, DropdownItem, Dropdown, Tree, Select, Option, DatePicker
 } from 'element-ui'
 
 import 'element-ui/lib/theme-chalk/index.css'
@@ -40,6 +40,9 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Dropdown)
 Vue.use(Tree)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(DatePicker)
 
 Vue.prototype.$message = Message
 Vue.prototype.$msgbox = MessageBox

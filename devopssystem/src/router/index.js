@@ -7,7 +7,7 @@ import User from '../views/user/UserView.vue'
 import Perm from '../views/user/UserPermView.vue'
 import Role from '../views/user/UserRoleView.vue'
 import CiType from '../views/cmdb/CiTypeView.vue'
-
+import Ci from '../views/cmdb/CiView.vue'
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -36,7 +36,8 @@ const routes = [
       { path: '/users', component: User },
       { path: '/users/perms', component: Perm },
       { path: '/users/roles', component: Role },
-      { path: '/cmdb/citypes', component: CiType }
+      { path: '/cmdb/citypes', component: CiType },
+      { path: '/cmdb/cis', component: Ci }
     ]
   }
 ]
